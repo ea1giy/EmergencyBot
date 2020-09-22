@@ -1,10 +1,7 @@
 from telegram.ext import Updater, CommandHandler
 import logging
 
-
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
-updater = Updater(token='TOKEN', use_context=True)
-dispatcher = updater.dispatcher
 
 
 def start(update, context):
@@ -22,22 +19,29 @@ def cuadrante():
     pass
 
 
-def modificarCuadrante():
+def modificar_cuadrante():
     # Sección para modificar los horarios del cuadrante.
     pass
 
 
-def consultarCuadrante():
+def consultar_cuadrante():
     # Consulta o descarga de cuadrante actual
     pass
 
 
-# Registro de los diferentes comandos del bot
-start_handler = CommandHandler('start', start)
-dispatcher.add_handler(start_handler)
+def main():
+    updater = Updater(token='TOKEN', use_context=True)
+    dp = updater.dispatcher
+
+    # Registro de los diferentes comandos del bot.
+    dp.add_handler(CommandHandler('start', start))
+
+    # Iniciar bot en modo temporizado
+    updater.start_polling()
+    updater.idle()
+
+    # Iniciar bot en modo Webhooks
 
 
-# Comenzar actualizaciones del bot
-updater.start_polling()
-updater.idle()
-
+if __name__ == "__main__":
+    main()
